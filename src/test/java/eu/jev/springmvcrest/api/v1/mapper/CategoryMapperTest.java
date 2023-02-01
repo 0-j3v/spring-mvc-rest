@@ -4,9 +4,11 @@ import eu.jev.springmvcrest.api.v1.model.CategoryDTO;
 import eu.jev.springmvcrest.domain.Category;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
-import org.mockito.Mock;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CategoryMapperTest {
 
@@ -16,15 +18,21 @@ class CategoryMapperTest {
     CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
 
     @Test
-    public void categoryToCategoryDTO() {
+    public void categoryListToCategoryDTOList() {
+        Category category = Category.builder().id(ID).name(NAME).build();
+        List<Category> categoryList = Arrays.asList(category, category);
 
-        //given
+        List<CategoryDTO> categoryDTOList = categoryMapper.categoryListToCategoryDTOList(categoryList);
+
+        assertEquals(2, categoryDTOList.size());
+    }
+
+    @Test
+    public void categoryToCategoryDTO() {
         Category category = Category.builder().id(ID).name(NAME).build();
 
-        //when
         CategoryDTO categoryDTO = categoryMapper.categoryToCategoryDTO(category);
 
-        //then
         assertEquals(Long.valueOf(ID), categoryDTO.getId());
         assertEquals(NAME, categoryDTO.getName());
     }
