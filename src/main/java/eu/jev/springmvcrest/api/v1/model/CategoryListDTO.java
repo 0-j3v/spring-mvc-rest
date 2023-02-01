@@ -1,16 +1,15 @@
 package eu.jev.springmvcrest.api.v1.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDTO {
+public class CategoryListDTO {
 
-    private Long id;
-    private String name;
+    List<CategoryDTO> categories;
 }
